@@ -1,8 +1,8 @@
 import { AxiosError } from "axios"
 import { useMutation } from "react-query"
-import { registerUser } from "../api"
-import { showNotification, updateNotification } from "@mantine/notifications";
-import { Button, Paper, TextInput, PasswordInput, Stack, Center, Title } from "@mantine/core";
+import { login } from "../api"
+import { showNotification} from "@mantine/notifications";
+import { Button, Paper, TextInput, PasswordInput, Stack, Title } from "@mantine/core";
 import Head from "next/head";
 import { useForm } from "@mantine/form";
 import styles from "../../styles/Home.module.css";
@@ -23,31 +23,18 @@ export default function LoginPage() {
     });
 
 
-    const mutation = useMutation<string, AxiosError, Parameters<typeof registerUser>["0"]>(registerUser, {
-        onMutate: () => {
+    const mutation = useMutation<string, AxiosError, Parameters<typeof login>["0"]>(login, {
+        onSuccess: () => {
+            router.push("/")
+        },
+
+        onError: () => {
             showNotification({
                 id: "login",
-                title: "Creating account",
-                message: "Please wait...",
-                loading: true,
-            });
-        },
-        onSuccess: () => {
-            updateNotification({
-                id: "login",
-                title: "Success",
-                message: "Successfully created account",
-            })
-            router.push("/auth/login")
-        },
-        onError: () => {
-            updateNotification({
-                id: "register",
-                title: "Error",
-                message: "Could not create account",
+                title: "Invalid email or password",
+                message: "Could not login",
             })
         }
-
     });
 
 

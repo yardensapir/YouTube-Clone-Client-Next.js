@@ -6,6 +6,7 @@ import { NotificationsProvider } from '@mantine/notifications'
 import { NextPage } from 'next'
 import { ReactElement, ReactNode } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { AuthContextProvider } from '../context/authContext'
 
 const queryClient = new QueryClient();
 
@@ -31,17 +32,18 @@ export default function App({ Component, pageProps }: AppProopsWithLayouts) {
         withNormalizeCSS
         theme={{
           colorScheme: "dark",
-       
-          
+
+
         }}>
         <NotificationsProvider>
           <QueryClientProvider client={queryClient}>
-
-            {getLayout(
-              <main>
-                <Component {...pageProps} />
-              </main>
-            )}
+            <AuthContextProvider>
+              {getLayout(
+                <main>
+                  <Component {...pageProps} />
+                </main>
+              )}
+            </AuthContextProvider>
           </QueryClientProvider>
         </NotificationsProvider>
       </MantineProvider>
