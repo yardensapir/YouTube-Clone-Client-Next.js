@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { Video } from "../../types";
 const base = process.env.NEXT_PUBLIC_API_ENDPOINT
 
 const userBase = `${base}api/users`
@@ -36,5 +36,27 @@ export function getMe() {
 
 }
 
+export function uploadVideo({ formData, config }: { formData: FormData, config: { onUploadProgress: (ProgressEvent: any) => void } }) {
+    return axios.post(videoBase, formData, {
+        withCredentials: true,
+        ...config,
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    }).then((res)=>res.data)
+}
 
+export function updateVideo({
+    videoId,
+    ...payload
+  }: {
+    videoId: string;
+    title: string;
+    description: string;
+    published: boolean;
+  }) {
+    return axios.patch<Video>(`${videoBase}/${videoId}`, payload, {
+      withCredentials: true,
+    });
+  }
 

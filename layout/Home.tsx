@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { useMe } from '../context/authContext'
 import { UploadVideo } from '../components/UploadVideo'
 import Link from 'next/link'
+
+
 export default function HomePageLayout({ children }: { children: React.ReactNode }) {
     const { user, refetch } = useMe()
     return (
@@ -14,10 +16,11 @@ export default function HomePageLayout({ children }: { children: React.ReactNode
                 </Navbar>
             }
             header={
-                <Header height={100} p='xs'>
+                <Header  height={110} p='xs'>
                     <Box sx={() => ({ display: "flex" })}>
-                        <Box sx={() => ({ flex: "1" })} >
-                            <Image src="/logo1.png" alt="logo" width={40} height={40} />
+                        <Box sx={() => ({ flex: "1"})} >
+                                <Image src="/logo1.png" alt="logo" width={40} height={40} />
+                                <h3>YouTube</h3>
                         </Box>
                         {!user && (
                             <>
