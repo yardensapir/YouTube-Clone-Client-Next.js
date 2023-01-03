@@ -40,7 +40,7 @@ export default function HomePageLayout({ children }: { children: React.ReactNode
 
                             {user && <>
                               
-                                    <Button mr={20}>Log Out</Button>
+                                  
                                     <UploadVideo/>
 
                             </>
