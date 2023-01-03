@@ -60,3 +60,6 @@ export function updateVideo({
     });
   }
 
+  export function getVideos(){
+    return axios.get(videoBase).then(res=>res.data)
+  }

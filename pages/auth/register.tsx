@@ -23,7 +23,7 @@ export default function RgisterPage() {
         },
         validate: {
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-            password:(value)=>(value.length <6 ? "password must be at least 6 charchters long": null),
+            password: (value) => (value.length < 6 ? "password must be at least 6 charchters long" : null),
             confirmPassword: (value, values) =>
                 value !== values.password ? 'Passwords did not match' : null,
 
@@ -62,15 +62,11 @@ export default function RgisterPage() {
 
     });
 
-
-
     return (
         <>
-
             <Head>
                 <title>Register User</title>
             </Head>
-
             <main className={styles.register_form}>
 
                 <Paper className={styles.paper}>
@@ -80,9 +76,7 @@ export default function RgisterPage() {
                             Let's get started 👋
                         </Title>
 
-
                         <div className={styles.form_box}>
-
 
                             <Stack>
                                 <TextInput
@@ -117,8 +111,6 @@ export default function RgisterPage() {
                 </Paper>
 
             </main>
-
-
 
         </>
     )

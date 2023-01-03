@@ -7,6 +7,7 @@ import { uploadVideo, updateVideo } from "../pages/api";
 import { Video } from "../types";
 import { useForm } from "@mantine/form";
 import { AxiosError, AxiosResponse } from "axios";
+import { useVideo } from "../context/video";
 
 function EditVideoForm({
     videoId,
@@ -16,6 +17,7 @@ function EditVideoForm({
     setOpened: Dispatch<SetStateAction<boolean>>;
 }) {
 
+    const {refetch} = useVideo()
     const form = useForm({
         initialValues: {
             title: "",
@@ -30,6 +32,7 @@ function EditVideoForm({
         updateVideo, {
         onSuccess: () => {
             setOpened(false);
+            refetch( )
         },
     }
     );
@@ -115,12 +118,12 @@ export function UploadVideo() {
                     label={`${progress}%`}
                     value={progress} mb="xl"
                 />}
-                 {mutation.data && (
-          <EditVideoForm
-            setOpened={setOpend}
-            videoId={mutation.data.videoId}
-          />
-        )}
+                {mutation.data && (
+                    <EditVideoForm
+                        setOpened={setOpend}
+                        videoId={mutation.data.videoId}
+                    />
+                )}
             </Modal>
 
             <Button onClick={() => setOpend(true)}>Upload Video</Button>
